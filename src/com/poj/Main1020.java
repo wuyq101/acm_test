@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * 1020 问边长为S的正方形能否切分成n个小正方形
  * 
- * @author wyq@palmdeal.com
+ * @author wuyq101
  * @version 1.0
  */
 public class Main1020 {

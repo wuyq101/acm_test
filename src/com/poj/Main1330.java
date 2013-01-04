@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
 * 1330 LCA 最近公共祖先   Tarjan算法
 *
-* @author wyq@palmdeal.com
+* @author wuyq101
 * @version 1.0
 */
 public class Main1330 {

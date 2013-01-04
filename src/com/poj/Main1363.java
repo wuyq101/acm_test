@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * 1363 基本栈 操作
- * @author wyq@palmdeal.com
+ * @author wuyq101
  * @version 1.0
  */
 public class Main1363 {

@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * 2635 大整数求模运算
  * 
- * @author wyq@palmdeal.com
+ * @author wuyq101
  * @version 1.0
  */
 public class Main2635 {

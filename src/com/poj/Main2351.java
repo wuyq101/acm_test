@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * 2351 Time zones
  * 
- * @author wyq@palmdeal.com
+ * @author wuyq101
  * @version 1.0
  */
 public class Main2351 {

@@ -27,7 +27,7 @@ import java.util.Scanner;
  * t(n) = 2*t(n-1)+1;
  * </pre>
  * 
- * @author wyq@palmdeal.com
+ * @author wuyq101
  * @version 1.0
  */
 public class Main1090 {

@@ -6,7 +6,7 @@ import static java.lang.Math.min;
 /**
  * 2520 编辑距离
  * 
- * @author wyq@palmdeal.com
+ * @author wuyq101
  * @version 1.0
  */
 public class Main2520 {

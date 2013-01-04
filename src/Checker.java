@@ -16,7 +16,7 @@ import java.util.Set;
  *   1
  * </pre>
  * 
- * @author wyq@palmdeal.com
+ * @author wuyq101
  * @version 1.0
  */
 public class Checker {

@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * 3002 求最小公倍数
  * 
- * @author wyq@palmdeal.com
+ * @author wuyq101
  * @version 1.0
  */
 public class Main3002 {

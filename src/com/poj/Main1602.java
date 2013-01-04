@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * 1602 zip
  * 
- * @author wyq@palmdeal.com
+ * @author wuyq101
  * @version 1.0
  */
 public class Main1602 {

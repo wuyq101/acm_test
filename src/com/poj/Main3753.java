@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * 3753 根据关键字进行字符串拷贝
  * 
- * @author wyq@palmdeal.com
+ * @author wuyq101
  * @version 1.0
  */
 public class Main3753 {

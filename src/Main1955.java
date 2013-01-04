@@ -7,7 +7,7 @@ import java.util.Scanner;
  * left '0', front '1', right '2', back '3', top '4', bottom '5'
  * </pre>
  * 
- * @author wyq@palmdeal.com
+ * @author wuyq101
  * @version 1.0
  */
 public class Main1955 {

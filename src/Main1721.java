@@ -13,7 +13,7 @@ import java.util.Scanner;
  * 然后在将p洗牌  k-s次，就回到了x
  * </pre>
  * 
- * @author wyq@palmdeal.com
+ * @author wuyq101
  * @version 1.0
  */
 public class Main1721 {
