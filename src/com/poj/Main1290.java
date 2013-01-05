@@ -1,23 +1,19 @@
+package com.poj;
 import java.util.Scanner;
 
 /**
- * 1955 模拟魔方
- * 
- * <pre>
- * left '0', front '1', right '2', back '3', top '4', bottom '5'
- * </pre>
+ * 1290 模拟 魔方
  * 
  * @author wuyq101
  * @version 1.0
  */
-public class Main1955 {
+public class Main1290 {
     private static char[][][] cube = new char[6][3][3];
 
     public static void main(String[] args) {
         Scanner cin = new Scanner(System.in);
-        int num = cin.nextInt();
-        int idx = 0;
-        while (num-- > 0) {
+        int t = cin.nextInt();
+        while (t-- > 0) {
             // top
             for (int i = 0; i < 3; i++)
                 for (int j = 0; j < 3; j++)
@@ -30,45 +26,30 @@ public class Main1955 {
             for (int i = 0; i < 3; i++)
                 for (int j = 0; j < 3; j++)
                     cube[5][i][j] = cin.next().charAt(0);
-            int t = cin.nextInt();
-            while (t-- > 0) {
-                int s = cin.nextInt();
-                int d = cin.nextInt();
+            while (true) {
+                String tn = cin.next();
+                if ("0".equals(tn)) {
+                    verify();
+                    break;
+                }
+                int d = tn.startsWith("+") ? 1 : -1;
+                int s = tn.charAt(1) - '1';
                 turn(s, d);
             }
-            System.out.printf("Scenario #%d:\n", ++idx);
-            print();
         }
     }
 
-    private static void print() {
-        StringBuilder sb = new StringBuilder();
-        // top
-        for (int i = 0; i < 3; i++) {
-            sb.append("     ");
-            for (int j = 0; j < 3; j++) {
-                sb.append(' ').append(cube[4][i][j]);
-            }
-            sb.append('\n');
+    private static void verify() {
+        for (int s = 0; s < 6; s++) {
+            char ch = cube[s][0][0];
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    if (cube[s][i][j] != ch) {
+                        System.out.println("No, you are wrong!");
+                        return;
+                    }
         }
-        // left, front, right, back
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 12; j++) {
-                sb.append(cube[j / 3][i][j % 3]).append(' ');
-            }
-            sb.deleteCharAt(sb.length() - 1);
-            sb.append('\n');
-        }
-        // bottom
-        for (int i = 0; i < 3; i++) {
-            sb.append("     ");
-            for (int j = 0; j < 3; j++) {
-                sb.append(' ').append(cube[5][i][j]);
-            }
-            sb.append('\n');
-        }
-        sb.append('\n');
-        System.out.printf(sb.toString());
+        System.out.println("Yes, grandpa!");
     }
 
     private static void turn(int s, int d) {

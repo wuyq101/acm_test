@@ -1,3 +1,4 @@
+package com.poj;
 import java.util.Scanner;
 
 /**

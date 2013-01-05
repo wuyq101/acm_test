@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Main3167 {
     private static int N;
     private static int K;
-    private static int S;
+//    private static int S;
     private static int[] n;
     private static int[] k;
     private static int count;
@@ -21,7 +21,8 @@ public class Main3167 {
         Scanner cin = new Scanner(new BufferedInputStream(System.in));
         N = cin.nextInt();
         K = cin.nextInt();
-        S = cin.nextInt();
+//        S = cin.nextInt();
+        cin.nextInt();
         n = new int[N + 1];
         k = new int[K + 1];
         for (int i = 1; i <= N; i++) {
