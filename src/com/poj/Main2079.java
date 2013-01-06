@@ -1,3 +1,4 @@
+package com.poj;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -14,7 +15,7 @@ import java.util.Scanner;
  * @author wuyq101
  * @version 1.0
  */
-public class Main {
+public class Main2079 {
     private static int N;
     private static P[] points = new P[50000];
     private static List<P> stack = new ArrayList<P>();
@@ -52,23 +53,30 @@ public class Main {
      */
     private static void calc_result() {
         int len = stack.size();
-        double max = 0;
-        for (int i = 0; i < len - 2; i++) {
-            double last2 = -1;
-            for (int j = i + 1; j < len - 1; j++) {
-                double last = -1;
-                for (int k = j + 1; k <= len - 1; k++) {
-                    double now = area(stack.get(i), stack.get(j), stack.get(k));
-                    if (now < last)
+        double max = -1;
+        for (int i = 0; i <= len - 3; i++) {
+            int lask_k = i + 2;
+            double area_j = -1;
+            for (int j = i + 1; j <= len - 2; j++) {
+                double s = -1;
+                for (int k = lask_k; k <= len - 1; k++) {
+                    double d = area(stack.get(i), stack.get(j), stack.get(k));
+                    // System.out.println(i + "," + j + "," + k + "\t" + d);
+                    if (d >= s) {
+                        s = d;
+                    } else {
+                        lask_k = k - 1;
                         break;
-                    last = now;
+                    }
                 }
-                if (last < last2)
+                if (s >= area_j) {
+                    area_j = s;
+                } else {
                     break;
-                last2 = last;
+                }
             }
-            if (last2 > max)
-                max = last2;
+            if (area_j >= max)
+                max = area_j;
         }
         System.out.printf("%.2f\n", max);
     }
