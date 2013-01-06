@@ -61,7 +61,7 @@ public class Main2079 {
                 double s = -1;
                 for (int k = lask_k; k <= len - 1; k++) {
                     double d = area(stack.get(i), stack.get(j), stack.get(k));
-                    // System.out.println(i + "," + j + "," + k + "\t" + d);
+                     System.out.println(i + "," + j + "," + k + "\t" + d);
                     if (d >= s) {
                         s = d;
                     } else {
