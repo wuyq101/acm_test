@@ -1,4 +1,4 @@
-package com.poj;
+package com.poj.geometry;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
