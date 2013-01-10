@@ -1,4 +1,5 @@
 package com.poj.geometry;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,6 +28,8 @@ public class Main2932 {
     // 在扫描线上的圆,从下到上排序
     private static Integer[] up, left, right, rank;
     private static double[] x, y, r;
+    private static double[] d_l, d_r;
+    private static boolean[] removed;
     private static List<Integer> answer = new ArrayList<Integer>();
     private static TreeSet<Integer> circle_rank_on_scan = new TreeSet<Integer>();
 
@@ -40,11 +43,16 @@ public class Main2932 {
         x = new double[N];
         y = new double[N];
         r = new double[N];
+        d_l = new double[N];
+        d_r = new double[N];
+        removed = new boolean[N];
         for (int i = 0; i < N; i++) {
             up[i] = left[i] = right[i] = i;
             r[i] = cin.nextDouble();
             x[i] = cin.nextDouble();
             y[i] = cin.nextDouble();
+            d_l[i] = x[i] - r[i];
+            d_r[i] = x[i] + r[i];
         }
         // 排序
         sort();
@@ -73,12 +81,19 @@ public class Main2932 {
     private static void scan() {
         int i = 0, j = 0;
         while (i < N || j < N) {
-            if (i < N && x[left[i]] - r[left[i]] <= x[right[j]] + r[right[i]]) {
+            int L = left[i], R = right[j];
+            if (d_l[L] <= d_r[R]) {
                 // 将left[i]挂到scan_line上
-                insert(left[i++]);
+                insert(L);
+                i++;
+                if (i == N)
+                    return;
             } else {
                 // 将right[j]移除掉
-                circle_rank_on_scan.remove(rank[right[j++]]);
+                if (!removed[R]) {
+                    circle_rank_on_scan.remove(rank[R]);
+                }
+                j++;
             }
         }
     }
@@ -88,10 +103,12 @@ public class Main2932 {
         int r = rank[a];
         Integer lower = circle_rank_on_scan.lower(r);
         if (lower != null && circle_contains(a, up[lower])) {
+            removed[a] = true;
             return;
         }
         Integer higher = circle_rank_on_scan.higher(r);
         if (higher != null && circle_contains(a, up[higher])) {
+            removed[a] = true;
             return;
         }
         circle_rank_on_scan.add(r);
@@ -121,20 +138,14 @@ public class Main2932 {
     private static class Comparator_Left implements Comparator<Integer> {
         @Override
         public int compare(Integer a, Integer b) {
-            double dx = x[a] - r[a] - (x[b] - r[b]);
-            if (dx == 0)
-                return 0;
-            return dx < 0 ? -1 : 1;
+            return d_l[a] == d_l[b] ? 0 : d_l[a] < d_l[b] ? -1 : 1;
         }
     }
 
     private static class Comparator_Right implements Comparator<Integer> {
         @Override
         public int compare(Integer a, Integer b) {
-            double dx = x[a] + r[a] - (x[b] + r[b]);
-            if (dx == 0)
-                return 0;
-            return dx < 0 ? -1 : 1;
+            return d_r[a] == d_r[b] ? 0 : d_r[a] < d_r[b] ? -1 : 1;
         }
     }
 }
