@@ -1,9 +1,11 @@
+package com.poj.geometry;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 /**
  * <pre>
@@ -12,19 +14,21 @@ import java.util.Scanner;
  * 分析：因为圆锥的半径和高相等，问题退化为平面上n个圆，圆之间相互包含，求没有被其他圆包含的圆。圆不相交。
  *       1. 根据每个圆最左边的坐标排序（x-r,y）,x坐标相同的话，根据y从小到大排序。
  *       2. 假设一条扫描线平行于y轴，从左向右开始扫描。
- * 
+ *       3. 当扫描线遇到是圆的最左边，判断是否是powful圆，判断的时候，找到现在的powful圆，只需要找它的上下两个判断是否包含关系
+ *          如果不是包含关系，则认为这个圆是powful的
+ *       4. 当扫描线遇到圆的最右边，将这个圆从集合中删除，因为以后在碰到的圆，都和它无关。
  * </pre>
  * 
  * @author wuyq101
  * @version 1.0
  */
-public class Main {
+public class Main2932 {
     private static int N;
     // 在扫描线上的圆,从下到上排序
     private static Integer[] up, left, right, rank;
-    private static boolean[] used;
     private static double[] x, y, r;
     private static List<Integer> answer = new ArrayList<Integer>();
+    private static TreeSet<Integer> circle_rank_on_scan = new TreeSet<Integer>();
 
     public static void main(String[] args) {
         Scanner cin = new Scanner(System.in);
@@ -33,7 +37,6 @@ public class Main {
         left = new Integer[N];
         right = new Integer[N];
         rank = new Integer[N];
-        used = new boolean[N];
         x = new double[N];
         y = new double[N];
         r = new double[N];
@@ -72,12 +75,10 @@ public class Main {
         while (i < N || j < N) {
             if (i < N && x[left[i]] - r[left[i]] <= x[right[j]] + r[right[i]]) {
                 // 将left[i]挂到scan_line上
-                insert(left[i]);
-                i++;
+                insert(left[i++]);
             } else {
                 // 将right[j]移除掉
-                used[right[j]] = false;
-                j++;
+                circle_rank_on_scan.remove(rank[right[j++]]);
             }
         }
     }
@@ -85,27 +86,15 @@ public class Main {
     private static void insert(Integer a) {
         // 找a的up和bottom
         int r = rank[a];
-        for (int i = r + 1; i < N; i++) {
-            if (used[up[i]]) {
-                // 判断圆a和圆up[i]
-                if (circle_contains(a, up[i])) {
-                    return;
-                } else {
-                    break;
-                }
-            }
+        Integer lower = circle_rank_on_scan.lower(r);
+        if (lower != null && circle_contains(a, up[lower])) {
+            return;
         }
-        for (int i = r - 1; i >= 0; i--) {
-            if (used[up[i]]) {
-                // 判断圆a和圆up[i]
-                if (circle_contains(a, up[i])) {
-                    return;
-                } else {
-                    break;
-                }
-            }
+        Integer higher = circle_rank_on_scan.higher(r);
+        if (higher != null && circle_contains(a, up[higher])) {
+            return;
         }
-        used[a] = true;
+        circle_rank_on_scan.add(r);
         answer.add(a);
     }
 
