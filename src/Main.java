@@ -29,19 +29,21 @@ public class Main {
             bread = new Polygon();
             bread.n = n;
             for (int i = 0; i < n; i++) {
-                bread.p[i] = new Point(cin.nextDouble(), cin.nextDouble());
+                bread.p[i] = new Point(cin.nextInt(), cin.nextInt());
             }
             bread.p[n] = bread.p[0];
             solve();
+            n = cin.nextInt();
+            k = cin.nextInt();
+            h = cin.nextInt();
         }
     }
 
     private static void solve() {
         if (k == 0 || h == 0) {
-            System.out.printf("%.2f\n", 0.0);
+            System.out.printf("%.2f\n", 0);
             return;
         }
-        k = k >= n ? n : k;
         Polygon polygon = new Polygon(bread);
         area = Double.MAX_VALUE;
         dfs(polygon, 0, 0);
@@ -49,11 +51,10 @@ public class Main {
     }
 
     private static void dfs(Polygon polygon, int count, int j) {
-        if (count == k) {
-            //已经使用了k个动作，开始计算面积
+        if (count == k || k > n && count == n) {
+            //已经使用了k个动作，或者每条边都已经被枚举，开始计算面积
             double cur = getArea(polygon);
             area = Math.min(cur, area);
-            System.out.println("-------------------");
             return;
         }
         for (int i = j; i < n; i++) {
@@ -61,8 +62,6 @@ public class Main {
             Point p2 = new Point();
             //将i，i+1平移到p1，p2上
             translate(bread.p[i], bread.p[i + 1], p1, p2);
-            System.out.printf("i=%d\n", i);
-            System.out.println(bread.p[i] + "--" + bread.p[i + 1] + "    " + p1 + "--" + p2);
             Polygon temp = new Polygon(polygon);
             temp = cut_polygon(temp, p1, p2);
             dfs(temp, count + 1, i + 1);
@@ -82,7 +81,7 @@ public class Main {
             double cp1 = cross_product(a, b, polygon.p[i]);
             double cp2 = cross_product(a, b, polygon.p[i + 1]);
             //a，b，p[i]在ab线的上方,p[i]点继续保留
-            if (cp1 >= 0) {
+            if (cp1 >= eps) {
                 result.p[result.n++] = new Point(polygon.p[i].x, polygon.p[i].y);
             }
             //边i和直线ab相交
@@ -132,7 +131,7 @@ public class Main {
 
     private static void translate(Point a, Point b, Point c, Point d) {
         //垂直于向量ab的向量v
-        Point v = new Point(b.y - a.y, b.x - a.x);
+        Point v = new Point(a.y - b.y, b.x - a.x);
         double t = h / Math.sqrt(v.x * v.x + v.y * v.y);
         c.x = a.x + t * v.x;
         c.y = a.y + t * v.y;
