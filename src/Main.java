@@ -12,20 +12,23 @@ import java.util.Scanner;
  * </pre>
  */
 public class Main {
-    private static int n;
-    private static int k;
-    private static int h;
+    private static int n, k, h;
     private static Polygon bread;
     private static double area;
-    public static final double eps = 1e-8;
+    private static final double eps = 1e-8;
+    private static final int N = 21;
+    //每条边的平行点，中间结果，仅计算一次
+    private static Point[][] p_p = new Point[N][2];
 
 
     public static void main(String[] args) {
         Scanner cin = new Scanner(System.in);
-        n = cin.nextInt();
-        k = cin.nextInt();
-        h = cin.nextInt();
-        while (n != 0 && k != 0 && h != 0) {
+        while (true) {
+            n = cin.nextInt();
+            k = cin.nextInt();
+            h = cin.nextInt();
+            if (n == 0 && k == 0 && h == 0)
+                break;
             bread = new Polygon();
             bread.n = n;
             for (int i = 0; i < n; i++) {
@@ -33,16 +36,17 @@ public class Main {
             }
             bread.p[n] = bread.p[0];
             solve();
-            n = cin.nextInt();
-            k = cin.nextInt();
-            h = cin.nextInt();
         }
     }
 
     private static void solve() {
         if (k == 0 || h == 0) {
-            System.out.printf("%.2f\n", 0);
+            System.out.println("0.00");
             return;
+        }
+        for (int i = 0; i < n; i++) {
+            p_p[i][0] = null;
+            p_p[i][1] = null;
         }
         Polygon polygon = new Polygon(bread);
         area = Double.MAX_VALUE;
@@ -58,14 +62,20 @@ public class Main {
             return;
         }
         for (int i = j; i < n; i++) {
-            Point p1 = new Point();
-            Point p2 = new Point();
             //将i，i+1平移到p1，p2上
-            translate(bread.p[i], bread.p[i + 1], p1, p2);
+            translate(i);
             Polygon temp = new Polygon(polygon);
-            temp = cut_polygon(temp, p1, p2);
+            temp = cut_polygon(temp, p_p[i][0],p_p[i][1]);
             dfs(temp, count + 1, i + 1);
         }
+    }
+
+    private static void translate(int i){
+        if(p_p[i][0]!=null)
+            return;
+        p_p[i][0] = new Point();
+        p_p[i][1] = new Point();
+        translate(bread.p[i], bread.p[i + 1],p_p[i][0],p_p[i][1]);
     }
 
     /**
@@ -81,7 +91,7 @@ public class Main {
             double cp1 = cross_product(a, b, polygon.p[i]);
             double cp2 = cross_product(a, b, polygon.p[i + 1]);
             //a，b，p[i]在ab线的上方,p[i]点继续保留
-            if (cp1 >= eps) {
+            if (cp1 >= 0) {
                 result.p[result.n++] = new Point(polygon.p[i].x, polygon.p[i].y);
             }
             //边i和直线ab相交
@@ -169,13 +179,16 @@ public class Main {
         }
     }
 
+    /**
+     * ax+by+c=0
+     */
     private static class Line {
         double a, b, c;
     }
 
     private static class Polygon {
         int n;
-        Point[] p = new Point[21];
+        Point[] p = new Point[N];
 
         public Polygon() {
         }
