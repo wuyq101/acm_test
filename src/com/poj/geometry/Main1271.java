@@ -67,17 +67,17 @@ public class Main1271 {
             //将i，i+1平移到p1，p2上
             translate(i);
             Polygon temp = new Polygon(polygon);
-            temp = cut_polygon(temp, p_p[i][0],p_p[i][1]);
+            temp = cut_polygon(temp, p_p[i][0], p_p[i][1]);
             dfs(temp, count + 1, i + 1);
         }
     }
 
-    private static void translate(int i){
-        if(p_p[i][0]!=null)
+    private static void translate(int i) {
+        if (p_p[i][0] != null)
             return;
         p_p[i][0] = new Point();
         p_p[i][1] = new Point();
-        translate(bread.p[i], bread.p[i + 1],p_p[i][0],p_p[i][1]);
+        translate(bread.p[i], bread.p[i + 1], p_p[i][0], p_p[i][1]);
     }
 
     /**
