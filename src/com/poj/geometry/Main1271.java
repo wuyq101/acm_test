@@ -1,3 +1,5 @@
+package com.poj.geometry;
+
 import java.util.Scanner;
 
 /**
@@ -11,7 +13,7 @@ import java.util.Scanner;
  * Time: 下午9:38
  * </pre>
  */
-public class Main {
+public class Main1271 {
     private static int n, k, h;
     private static Polygon bread;
     private static double area;
