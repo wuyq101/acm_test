@@ -39,10 +39,12 @@ public class Main {
         for (int i = 1, len = s.length() - 1; i < len; i++) {
             ch = s.charAt(i);
             if (ch != pre) {
-                Point p = new Point();
-                p.x = x;
-                p.y = y;
-                polygon[n++] = p;
+                if (polygon[n] == null) {
+                    polygon[n] = new Point();
+                }
+                polygon[n].x = x;
+                polygon[n].y = y;
+                n++;
             }
             idx = ch - '0';
             x += direction[idx][0];
