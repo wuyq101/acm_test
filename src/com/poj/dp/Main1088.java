@@ -57,11 +57,12 @@ public class Main1088 {
         if (cnt[i][j] > 0)
             return cnt[i][j];
         cnt[i][j] = 1;
+        int a, b;
         for (int n = 0; n < 4; n++) {
-            if (map[i][j] > map[i + dir_x[n]][j + dir_y[n]]) {
-                if (cnt[i][j] < 1 + dp(i + dir_x[n], j + dir_y[n])) {
-                    cnt[i][j] = 1 + cnt[i + dir_x[n]][j + dir_y[n]];
-                }
+            a = i + dir_x[n];
+            b = j + dir_y[n];
+            if (map[i][j] > map[a][b] && cnt[i][j] < 1 + dp(a, b)) {
+                cnt[i][j] = 1 + cnt[a][b];
             }
         }
         return cnt[i][j];
