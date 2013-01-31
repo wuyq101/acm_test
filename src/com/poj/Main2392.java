@@ -1,4 +1,5 @@
 package com.poj;
+
 import java.io.BufferedInputStream;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -64,17 +65,18 @@ public class Main2392 {
             }
         }
     }
-}
 
-class Block implements Comparable<Block> {
-    public int height;
-    public int altitude;
-    public int amount;
+    private static class Block implements Comparable<Block> {
+        public int height;
+        public int altitude;
+        public int amount;
 
-    @Override
-    public int compareTo(Block o) {
-        if (altitude == o.altitude)
-            return 0;
-        return altitude > o.altitude ? 1 : -1;
+        @Override
+        public int compareTo(Block o) {
+            if (altitude == o.altitude)
+                return 0;
+            return altitude > o.altitude ? 1 : -1;
+        }
     }
 }
+

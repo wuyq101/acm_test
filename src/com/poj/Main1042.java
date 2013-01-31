@@ -1,11 +1,12 @@
 package com.poj;
+
 import java.io.BufferedInputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 
 /**
  * 1042 贪心
- * 
+ *
  * @author wuyq101
  * @version 1.0
  */
@@ -123,18 +124,18 @@ public class Main1042 {
         //System.out.printf("\nNumber of fish expected: %d\n\n", ans[k][0]);
         System.out.printf(sb.toString());
     }
-}
 
-class Lake implements Comparable<Lake> {
-    public int f;
-    public int i;
-    public int d;
+    private static class Lake implements Comparable<Lake> {
+        public int f;
+        public int i;
+        public int d;
 
-    @Override
-    public int compareTo(Lake other) {
-        if (f == other.f) {
-            return i < other.i ? 1 : -1;
+        @Override
+        public int compareTo(Lake other) {
+            if (f == other.f) {
+                return i < other.i ? 1 : -1;
+            }
+            return f > other.f ? 1 : -1;
         }
-        return f > other.f ? 1 : -1;
     }
 }

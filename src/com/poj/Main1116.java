@@ -1,4 +1,5 @@
 package com.poj;
+
 import java.io.BufferedInputStream;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -146,20 +147,21 @@ public class Main1116 {
         }
     }
 
-}
+    private static class Shelf implements Comparable<Shelf> {
+        public int y;
+        public int x;
+        public int len;
+        public int x1;
+        public int x2;
 
-class Shelf implements Comparable<Shelf> {
-    public int y;
-    public int x;
-    public int len;
-    public int x1;
-    public int x2;
-
-    @Override
-    public int compareTo(Shelf o) {
-        if (y == o.y) {
-            return 0;
+        @Override
+        public int compareTo(Shelf o) {
+            if (y == o.y) {
+                return 0;
+            }
+            return y < o.y ? -1 : 1;
         }
-        return y < o.y ? -1 : 1;
     }
+
 }
+
