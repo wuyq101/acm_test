@@ -1,3 +1,5 @@
+package com.poj.geometry;
+
 import java.util.*;
 
 /**
@@ -12,7 +14,7 @@ import java.util.*;
  * Date: 13-1-31
  * Time: 下午7:02
  */
-public class Main {
+public class Main1228 {
     private static class Point {
         int x, y;
     }
@@ -70,6 +72,18 @@ public class Main {
             }
         }
         //判断所有点是否再同一个边上
+        boolean flag = true;
+        for(int i=2; i<n; i++){
+            if(flag && cross_product(points[0],points[1],points[i])==0){
+                continue;
+            }else{
+                flag = false;
+                break;
+            }
+        }
+        //如果都共线
+        if(flag)
+            return  false;
         return true;
     }
 
