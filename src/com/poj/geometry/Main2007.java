@@ -1,3 +1,5 @@
+package com.poj.geometry;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -8,7 +10,7 @@ import java.util.Scanner;
  * Date: 13-2-2
  * Time: 下午10:45
  */
-public class Main {
+public class Main2007 {
     private static class Point {
         int x, y;
     }
