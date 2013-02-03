@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Main1418 {
 
     /**
-     * 坐标点
+     * 坐标点kdj
      */
     private static class Point {
         double x, y;
