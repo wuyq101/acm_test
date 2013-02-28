@@ -1,8 +1,6 @@
 package com.poj.sort;
 
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 /**
  * <pre>
