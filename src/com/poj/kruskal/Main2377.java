@@ -50,7 +50,7 @@ public class Main2377 {
             int u = edges[i].u, v = edges[i].v;
             //检查uv是否已经连通，如果已经连通，不使用这条边，如果不连通，则增加这条边；
             Set<Integer> set1 = find_set(u), set2 = find_set(v);
-            if (find_set(u) != find_set(v)) {
+            if (set1 != set2) {
                 set1.addAll(set2);
                 graph.remove(set2);
                 cost += edges[i].c;
