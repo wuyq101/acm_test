@@ -39,7 +39,6 @@ public class Main1877 {
     }
 
     private static void solve() {
-
         H = H / 100.0;
         int k = m * n, cnt = 0;
         Arrays.sort(h, 0, k);
