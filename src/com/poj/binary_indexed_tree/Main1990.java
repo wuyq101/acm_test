@@ -74,6 +74,10 @@ public class Main1990 {
         long sum = 0, allTotal = 0;
         for (int i = 1; i <= n; i++) {
             int x = cows[i].x;
+            //count_x: 在x之前，且v都小于v[i]的牛的头数
+            //total_x:在x之前，且v都小于v[i]的x坐标总和
+            //count_x * x - total_x为在x[i]之前，且v都小于v[i]的总距离
+            //allTotal - total_x - (i - count_x - 1) * x： 在x[i]之后且v小于v[i]的那些牛和x之间的总距离
             long count_x = count.read(x), total_x = total.read(x);
             sum += cows[i].v * (count_x * x - total_x + allTotal - total_x - (i - count_x - 1) * x);
             count.update(x, 1);
