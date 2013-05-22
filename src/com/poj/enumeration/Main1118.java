@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  * http://poj.org/problem?id=1118
- * 给定平面上的点，求共线最多的点的个数。  枚举
+ * 给定平面上的点，求共线最多的点的个数。  枚举。
  * User: wuyq101
  * Date: 13-3-15
  * Time: 下午3:33
