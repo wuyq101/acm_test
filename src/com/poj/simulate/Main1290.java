@@ -1,4 +1,4 @@
-package com.poj;
+package com.poj.simulate;
 import java.util.Scanner;
 
 /**

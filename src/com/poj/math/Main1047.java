@@ -1,4 +1,4 @@
-package com.poj;
+package com.poj.math;
 import java.io.BufferedInputStream;
 import java.math.BigInteger;
 import java.util.Scanner;

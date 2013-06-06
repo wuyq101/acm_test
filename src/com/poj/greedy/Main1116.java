@@ -1,4 +1,4 @@
-package com.poj;
+package com.poj.greedy;
 
 import java.io.BufferedInputStream;
 import java.util.Arrays;
