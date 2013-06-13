@@ -11,9 +11,6 @@ import java.io.InputStreamReader;
  *               注意每枚举到一个答案的时候，与前一个答案比较是否相同。
  *               另外，枚举的时候避免重复字母的处理，如果在第n层，已经枚举了某个字母，相同层就不需要枚举剩余的相同的字母。
  * </pre>
- * User: wuyq101
- * Date: 13-6-13
- * Time: 上午11:35
  */
 public class Main1256 {
     private static char[] word;
