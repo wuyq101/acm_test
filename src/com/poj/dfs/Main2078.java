@@ -2,6 +2,7 @@ package com.poj.dfs;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /**
@@ -26,35 +27,18 @@ public class Main2078 {
             if (-1 == n) break;
             for (int i = 0; i < n; i++) {
                 st = new StringTokenizer(cin.readLine());
-                for (int j = 0; j < n; j++) {
+                for (int j = 0; j < n; j++)
                     A[i][j] = Integer.parseInt(st.nextToken());
-                }
             }
             solve();
         }
     }
 
     private static void solve() {
-        init();
+        min_max_col_sum = Integer.MAX_VALUE;
+        Arrays.fill(sum, 0);
         dfs(0);
         System.out.println(min_max_col_sum);
-    }
-
-    private static void init() {
-        min_max_col_sum = 0;
-        for (int j = 0; j < n; j++) {
-            sum[j] = 0;
-            int d = col_sum(j);
-            if (d > min_max_col_sum)
-                min_max_col_sum = d;
-        }
-    }
-
-    private static int col_sum(int j) {
-        int sum = 0;
-        for (int i = 0; i < n; i++)
-            sum += A[i][j];
-        return sum;
     }
 
     private static void dfs(int row) {
@@ -67,13 +51,10 @@ public class Main2078 {
                 if (sum[j] > max)
                     max = sum[j];
             }
-            if (row == n - 1) {
-                if (max < min_max_col_sum)
-                    min_max_col_sum = max;
-            }
-            if (max < min_max_col_sum) {
+            if (row == n - 1 && max < min_max_col_sum)
+                min_max_col_sum = max;
+            if (max < min_max_col_sum)
                 dfs(row + 1);
-            }
             for (int j = 0; j < n; j++)
                 sum[j] -= A[row][j];
             shift(row, -k);
