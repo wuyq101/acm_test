@@ -2,6 +2,7 @@ package com.poj.dfs;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 /**
  * <pre>
@@ -54,38 +55,31 @@ public class Main1129 {
     }
 
     private static boolean verify(int k) {
-        return verify(0,k);
+        return verify(0, k);
     }
 
     private static boolean verify(int idx, int k) {
-        if (colors[idx] == 0) {
-            for (int c = 1; c <= k; c++) {
-                if (can_use(idx, c)) {
-                    colors[idx] = c;
-                    if (idx == N - 1)
-                        return true;
-                    if (verify(idx + 1, k))
-                        return true;
-                    colors[idx] = 0;
-                }
-            }
+        if (colors[idx] != 0) return false;
+        for (int c = 1; c <= k; c++) {
+            if (!can_use(idx, c)) continue;
+            colors[idx] = c;
+            if (idx == N - 1) return true;
+            if (verify(idx + 1, k)) return true;
+            colors[idx] = 0;
         }
         return false;
     }
 
     private static boolean can_use(int idx, int c) {
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < N; i++)
             if (map[idx][i] == 1 && colors[i] == c)
                 return false;
-        }
         return true;
     }
 
     private static void init() {
         for (int i = 0; i < 26; i++)
-            for (int j = 0; j < 26; j++)
-                map[i][j] = 0;
-        for (int i = 0; i < 26; i++)
-            colors[i] = 0;
+            Arrays.fill(map[i], 0);
+        Arrays.fill(colors, 0);
     }
 }
