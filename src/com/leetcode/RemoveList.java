@@ -13,35 +13,39 @@ public class RemoveList {
         }
     }
 
+
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        int count = 0;
         ListNode slow = head, fast = head;
-        while (fast != null && fast.next != null) {
+        for (int i = 1; i < n; i++)
+            fast = fast.next;
+        ListNode pre = null;
+        while (fast.next != null) {
+            pre = slow;
             slow = slow.next;
-            fast = fast.next.next;
-            count++;
+            fast = fast.next;
         }
-        count = fast != null ? (count << 1) + 1 : count << 1;
-        n = count - n;
-        ListNode cur = head, pre = null;
-        count = 0;
-        while (count < n) {
-            ListNode t = cur.next;
-            pre = cur;
-            cur = t;
-            count++;
-        }
-        if (pre == null)
+        //remove slow;
+        if (pre != null) {
+            pre.next = slow.next;
+            return head;
+        } else
             return head.next;
-        pre.next = pre.next.next;
-        return head;
     }
+
 
     public static void main(String[] args) {
         int[] nums = {1, 2, 3, 4, 5};
         ListNode head = makeList(nums);
         RemoveList t = new RemoveList();
-        t.removeNthFromEnd(head, 5);
+        head = t.removeNthFromEnd(head, 5);
+        print(head);
+    }
+
+    private static void print(ListNode head) {
+        while (head != null) {
+            System.out.println(head.val);
+            head = head.next;
+        }
     }
 
     private static ListNode makeList(int[] nums) {
@@ -52,6 +56,50 @@ public class RemoveList {
             cur.next = node;
             cur = cur.next;
         }
+        return head;
+    }
+
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode slow = head, fast = head;
+        ListNode pre = null;
+        while (fast != null && fast.next != null) {
+            pre = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        pre.next = null;
+        head = sortList(head);
+        slow = sortList(slow);
+        return merge(head, slow);
+    }
+
+    private ListNode merge(ListNode a, ListNode b) {
+        if (a == null) return b;
+        if (b == null) return a;
+        ListNode head = null;
+        if (a.val <= b.val) {
+            head = a;
+            a = a.next;
+        } else {
+            head = b;
+            b = b.next;
+        }
+        ListNode cur = head;
+        while (a != null && b != null) {
+            if (a.val <= b.val) {
+                cur.next = a;
+                a = a.next;
+            } else {
+                cur.next = b;
+                b = b.next;
+            }
+            cur = cur.next;
+        }
+        if (a != null)
+            cur.next = a;
+        if (b != null)
+            cur.next = b;
         return head;
     }
 }

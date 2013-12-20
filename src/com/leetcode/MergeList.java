@@ -44,6 +44,21 @@ public class MergeList {
         }
     }
 
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null) return null;
+        ListNode pre = head;
+        while (pre != null) {
+            ListNode cur = pre.next;
+            while (cur != null && cur.val == pre.val) {
+                //remove cur
+                pre.next = cur.next;
+                cur = cur.next;
+            }
+            pre = pre.next;
+        }
+        return head;
+    }
+
     public ListNode swapPairs(ListNode head) {
         if (head == null)
             return null;

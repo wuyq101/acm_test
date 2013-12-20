@@ -50,4 +50,19 @@ public class LIS {
         LIS test = new LIS();
         System.out.println(test.lis(a));
     }
+
+
+    public static void equilibrium(int[] a) {
+        int[] sumToRight = new int[a.length];
+        sumToRight[a.length - 1] = a[a.length - 1];
+        for (int i = a.length - 2; i >= 0; i--) {
+            sumToRight[i] = a[i] + sumToRight[i + 1];
+        }
+        int left = a[0];
+        for (int i = 1; i < a.length - 1; i++) {
+            if (left == sumToRight[i + 1])
+                System.out.println(i);
+            left += a[i];
+        }
+    }
 }
