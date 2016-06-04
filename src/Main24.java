@@ -14,12 +14,12 @@ public class Main24 {
             int b = cin.nextInt();
             int c = cin.nextInt();
             int d = cin.nextInt();
-            List<Integer> list = new ArrayList<Integer>(4);
+            List<Integer> list = new ArrayList<Integer>();
             list.add(a);
             list.add(b);
             list.add(c);
             list.add(d);
-            List<String> ex = new ArrayList<String>(4);
+            List<String> ex = new ArrayList<String>();
             ex.add(String.valueOf(a));
             ex.add(String.valueOf(b));
             ex.add(String.valueOf(c));
