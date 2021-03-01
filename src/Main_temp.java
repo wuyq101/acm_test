@@ -8,7 +8,7 @@ import java.util.*;
  * Ford-Fulkerson 最大流
  * Created by wuyingqiang on 2017/11/11.
  */
-public class Main {
+public class Main_temp {
     private static int N, M;
     private static final int MAX = 201;
 
