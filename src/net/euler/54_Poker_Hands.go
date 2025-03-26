@@ -55,7 +55,6 @@ func main() {
 	// 读取数据
 	buf, _ := os.ReadFile("54_poker.txt")
 	lines := strings.Split(string(buf), "\n")
-	fmt.Printf("read %d lines\n", len(lines))
 	for _, line := range lines {
 		if len(line) > 0 {
 			f(line)
@@ -75,7 +74,6 @@ func f(line string) {
 	h2 := s[5:]
 	d := cmp(NewHand(h1), NewHand(h2))
 	if d == 1 {
-		fmt.Println(line)
 		cnt++
 	}
 }
