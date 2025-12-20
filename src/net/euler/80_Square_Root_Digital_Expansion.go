@@ -58,7 +58,7 @@ func sqrt(n string) string {
 	for Cmp(left, right) < 0 {
 		mid = Div2(Add(left, right))
 		//fmt.Printf("left = %s, right = %s, mid = %s\n", left, right, mid)
-		prod := Mul(mid, mid)
+		prod := Mul(md, mid)
 		if Cmp(prod, n) > 0 {
 			right = mid
 		} else {

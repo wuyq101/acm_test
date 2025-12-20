@@ -18,7 +18,7 @@ func main() {
 			// 用f中的因子，从小到大，生成所有小于100000的数
 			list := gen(i, f)
 			E = append(E, list...)
-			//			fmt.Printf("%d len = %d\n", i, len(E))
+			fmt.Printf("%d len = %d\n", i, len(E))
 			if len(E) >= 10000 {
 				fmt.Printf("%v\n", E[9999])
 				return
